@@ -4,6 +4,17 @@ Fake implementation of HttpContextBase
 For terse and expressive tests without the tedious setup of a mocking framework. Tedious because
 the HttpContextBase object graph is deep and rightfully riddled with NotImplementedException.
 
+Can't I just roll my own?
+-----------
+Yes you can, and you'll have plenty of company.
+
+ 1. [MvcContrib](http://mvccontrib.codeplex.com/)
+ 2. [Oxite](http://oxite.codeplex.com/)
+ 3. [MVCFakes](http://stephenwalther.com/blog/archive/2008/07/01/asp-net-mvc-tip-12-faking-the-controller-context.aspx)
+ 4. [ASP.NET MVC Session at Mix08, TDD and MvcMockHelpers](http://www.hanselman.com/blog/ASPNETMVCSessionAtMix08TDDAndMvcMockHelpers.aspx)
+
+Each of these projects had the same idea yet they all have subtly different interfaces. NuGet is about unifying  community fragmentation and making it easy to share and reuse code. This project intentionally has no dependencies on Asp.Net MVC or any mocking frameworks.
+ 
 Examples:
 -----------
 
