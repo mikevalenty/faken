@@ -1,0 +1,9 @@
+
+/_ReSharper.*
+/src/Web/obj
+/src/Web/bin
+/test/Web/obj
+/test/Web/bin
+*.suo
+*.user
+*.nupkg
