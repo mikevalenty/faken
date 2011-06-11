@@ -9,6 +9,6 @@
     <projectUrl>https://github.com/mikevalenty/faken</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <tags>FakeHttpContextBase, FakeHttpRequestBase, FakeHttpSessionStateBase, mock, test, web</tags>
+    <tags>FakeHttpContextBase FakeHttpRequestBase FakeHttpSessionStateBase mock test web</tags>
   </metadata>
 </package>

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormTests.cs" />
+    <Compile Include="ContextTests.cs" />
     <Compile Include="QueryStringTests.cs" />
     <Compile Include="SessionTests.cs" />
     <Compile Include="RequestTests.cs" />
