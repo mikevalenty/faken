@@ -13,21 +13,18 @@ namespace FakeN.Web
 		private readonly NameValueCollection headers;
 		private readonly NameValueCollection serverVariables;
 		private readonly HttpCookieCollection cookies;
-		private readonly Uri url;
-		private readonly string method;
-		private readonly bool isLocal;
-		private readonly string userHostAddress;
+		private Uri url;
+		private string method;
+		private bool isLocal;
+		private string userHostAddress;
+		private string applicationPath;
+		private string[] acceptTypes;
 
-		public FakeHttpRequest(
-			Uri url = null,
-			string method = "GET",
-			bool isLocal = false,
-			string userHostAddress = null)
+		public FakeHttpRequest(Uri url = null, string method = "GET")
 		{
 			this.url = url ?? new Uri("http://localhost");
 			this.method = method;
-			this.isLocal = isLocal;
-			this.userHostAddress = userHostAddress ?? "localhost";
+			acceptTypes = new string[] { };
 			queryString = ParseQueryString(this.url.Query);
 			form = new NameValueCollection();
 			headers = new NameValueCollection();
@@ -40,9 +37,32 @@ namespace FakeN.Web
 			get { return url; }
 		}
 
+		public FakeHttpRequest SetUrl(Uri url)
+		{
+			this.url = url;
+			return this;
+		}
+
 		public override bool IsLocal
 		{
 			get { return isLocal; }
+		}
+
+		public FakeHttpRequest SetIsLocal(bool isLocal)
+		{
+			this.isLocal = isLocal;
+			return this;
+		}
+
+		public override string ApplicationPath
+		{
+			get { return applicationPath; }
+		}
+
+		public FakeHttpRequest SetApplicationPath(string applicationPath)
+		{
+			this.applicationPath = applicationPath;
+			return this;
 		}
 
 		public override string HttpMethod
@@ -50,9 +70,32 @@ namespace FakeN.Web
 			get { return method; }
 		}
 
+		public FakeHttpRequest SetHttpMethod(string method)
+		{
+			this.method = method;
+			return this;
+		}
+
 		public override string UserHostAddress
 		{
 			get { return userHostAddress; }
+		}
+
+		public FakeHttpRequest SetUserHostAddress(string userHostAddress)
+		{
+			this.userHostAddress = userHostAddress;
+			return this;
+		}
+
+		public override string[] AcceptTypes
+		{
+			get { return acceptTypes; }
+		}
+
+		public FakeHttpRequest SetAcceptTypes(string[] acceptTypes)
+		{
+			this.acceptTypes = acceptTypes;
+			return this;
 		}
 
 		public override string RequestType { get; set; }

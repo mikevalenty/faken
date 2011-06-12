@@ -30,7 +30,7 @@ namespace FakeN.Web.Test
 		[Test]
 		public void Request_can_be_specified_to_be_local()
 		{
-			Assert.That(new FakeHttpRequest(isLocal: true).IsLocal, Is.True);
+			Assert.That(new FakeHttpRequest().SetIsLocal(true).IsLocal, Is.True);
 		}
 
 		[Test]
@@ -41,6 +41,15 @@ namespace FakeN.Web.Test
 			request.ServerVariables.Add("REMOTE_ADDR", "127.0.0.1");
 
 			Assert.That(request.ServerVariables["REMOTE_ADDR"], Is.EqualTo("127.0.0.1"));
+		}
+
+		[Test]
+		public void Should_be_implemented()
+		{
+			var request = new FakeHttpRequest();
+
+			Assert.That(request.ApplicationPath, Is.Null);
+			Assert.That(request.AcceptTypes, Is.EquivalentTo(new string[] { }));
 		}
 	}
 }
