@@ -40,6 +40,8 @@ namespace FakeN.Web
 		public FakeHttpRequest SetUrl(Uri url)
 		{
 			this.url = url;
+			queryString.Clear();
+			queryString.Add(ParseQueryString(url.Query));
 			return this;
 		}
 

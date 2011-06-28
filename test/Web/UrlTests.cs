@@ -40,5 +40,17 @@ namespace FakeN.Web.Test
 
 			Assert.That(context.Request.QueryString["q"], Is.EqualTo("awesome"));
 		}
+
+		[Test]
+		public void Should_replace_query_string_when_url_is_changed()
+		{
+			var original = new Uri("http://google.com?q=original");
+
+			var changed = new Uri("http://google.com?q=changed");
+
+			var request = new FakeHttpRequest(original).SetUrl(changed);
+
+			Assert.That(request.QueryString["q"], Is.EqualTo("changed"));
+		}
 	}
 }
