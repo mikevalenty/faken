@@ -158,5 +158,22 @@ namespace FakeN.Web
 		{
 			this.files = files;
 		}
+
+		public override string Path
+		{
+			get { return Url.AbsolutePath; }
+		}
+
+		public override string FilePath
+		{
+			//TODO: in the case that the handler would be mapped to a prefix of the path, the last part of the AbsolutePath would be returned in PathInfo
+			get { return Url.AbsolutePath; }
+		}
+
+		public override string PathInfo
+		{
+			//TODO: in the case that the handler would be mapped to a prefix of the path, the last part of the AbsolutePath would be returned in PathInfo
+			get { throw new NotImplementedException(); }
+		}
 	}
 }
