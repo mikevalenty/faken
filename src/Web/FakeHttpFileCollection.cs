@@ -137,7 +137,10 @@ namespace FakeN.Web
 		/// <param name="name">The name of the object to return.</param><exception cref="T:System.NotImplementedException">Always.</exception>
 		public override HttpPostedFileBase this[string name]
 		{
-			get { return (HttpPostedFileBase)mWrappedCollection.Get(name); }
+			get
+			{
+				return (HttpPostedFileBase)mWrappedCollection.Get(name);
+			}
 		}
 
 		/// <summary>

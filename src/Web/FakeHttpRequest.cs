@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -20,6 +21,7 @@ namespace FakeN.Web
 		private string userHostAddress;
 		private string applicationPath;
 		private string[] acceptTypes;
+		private Stream inputStream;
 
 		public FakeHttpRequest(Uri url = null, string method = "GET")
 		{
@@ -174,6 +176,16 @@ namespace FakeN.Web
 		{
 			//TODO: in the case that the handler would be mapped to a prefix of the path, the last part of the AbsolutePath would be returned in PathInfo
 			get { throw new NotImplementedException(); }
+		}
+
+		public override Stream InputStream
+		{
+			get { return inputStream; }
+		}
+
+		public void SetInputStream(Stream inputStream)
+		{
+			this.inputStream = inputStream;
 		}
 	}
 }
