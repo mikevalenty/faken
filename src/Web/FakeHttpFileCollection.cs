@@ -8,19 +8,19 @@ namespace FakeN.Web
 {
 	public class FakeHttpFileCollection : HttpFileCollectionBase
 	{
-		private readonly ConcreteNameObjectCollection mWrappedCollection;
+		private readonly ConcreteNameObjectCollection wrappedCollection;
 
 		public FakeHttpFileCollection()
 		{
 			// Unfortunately, HttpFileCollectionBase overrides lots of features of NameObjectCollectionBase by throwing NotImplementedExceptions.
 			// It also fails to use a case-insensitive key-comparer the way the real HttpFileCollection does.
 			// So we'll wrap our own NameObjectCollectionBase implementation instead.
-			mWrappedCollection = new ConcreteNameObjectCollection();
+			wrappedCollection = new ConcreteNameObjectCollection();
 		}
 
 		public void Add(string formFieldValue, FakeHttpPostedFile file)
 		{
-			mWrappedCollection.Add(formFieldValue, file);
+			wrappedCollection.Add(formFieldValue, file);
 		}
 
 		/// <summary>
@@ -29,7 +29,7 @@ namespace FakeN.Web
 		/// <param name="array">The one-dimensional array that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param><param name="index">The zero-based index in <paramref name="array"/> at which copying starts.</param><exception cref="T:System.NotImplementedException">Always.</exception>
 		public override void CopyTo(Array array, int index)
 		{
-			((ICollection)mWrappedCollection).CopyTo(array, index);
+			((ICollection)wrappedCollection).CopyTo(array, index);
 		}
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace FakeN.Web
 		/// <param name="index">The index of the object to return.</param><exception cref="T:System.NotImplementedException">Always.</exception>
 		public override HttpPostedFileBase Get(int index)
 		{
-			return (HttpPostedFileBase) mWrappedCollection.Get(index);
+			return (HttpPostedFileBase) wrappedCollection.Get(index);
 		}
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace FakeN.Web
 		/// <param name="name">The name of the object to return.</param><exception cref="T:System.NotImplementedException">Always.</exception>
 		public override HttpPostedFileBase Get(string name)
 		{
-			return (HttpPostedFileBase)mWrappedCollection.Get(name);
+			return (HttpPostedFileBase)wrappedCollection.Get(name);
 		}
 
 		/// <summary>
@@ -65,7 +65,7 @@ namespace FakeN.Web
 		/// <exception cref="T:System.NotImplementedException">Always.</exception>
 		public override IEnumerator GetEnumerator()
 		{
-			return mWrappedCollection.GetEnumerator();
+			return wrappedCollection.GetEnumerator();
 		}
 
 		/// <summary>
@@ -77,7 +77,7 @@ namespace FakeN.Web
 		/// <param name="index">The index of the object name to return.</param><exception cref="T:System.NotImplementedException">Always.</exception>
 		public override string GetKey(int index)
 		{
-			return mWrappedCollection.GetKey(index);
+			return wrappedCollection.GetKey(index);
 		}
 
 		/// <summary>
@@ -89,7 +89,7 @@ namespace FakeN.Web
 		/// <exception cref="T:System.NotImplementedException">Always.</exception>
 		public override string[] AllKeys
 		{
-			get { return mWrappedCollection.GetAllKeys(); }
+			get { return wrappedCollection.GetAllKeys(); }
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace FakeN.Web
 		/// <exception cref="T:System.NotImplementedException">Always.</exception>
 		public override int Count
 		{
-			get { return mWrappedCollection.Count; }
+			get { return wrappedCollection.Count; }
 		}
 
 		/// <summary>
@@ -113,7 +113,7 @@ namespace FakeN.Web
 		/// <exception cref="T:System.NotImplementedException">Always.</exception>
 		public override bool IsSynchronized
 		{
-			get { return ((ICollection)mWrappedCollection).IsSynchronized; }
+			get { return ((ICollection)wrappedCollection).IsSynchronized; }
 		}
 
 		/// <summary>
@@ -125,7 +125,7 @@ namespace FakeN.Web
 		/// <exception cref="T:System.NotImplementedException">Always.</exception>
 		public override object SyncRoot
 		{
-			get { return ((ICollection) mWrappedCollection).SyncRoot; }
+			get { return ((ICollection) wrappedCollection).SyncRoot; }
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace FakeN.Web
 		{
 			get
 			{
-				return (HttpPostedFileBase)mWrappedCollection.Get(name);
+				return (HttpPostedFileBase)wrappedCollection.Get(name);
 			}
 		}
 
@@ -152,7 +152,7 @@ namespace FakeN.Web
 		/// <param name="index">The index of the object to get.</param><exception cref="T:System.NotImplementedException">Always.</exception>
 		public override HttpPostedFileBase this[int index]
 		{
-			get { return (HttpPostedFileBase)mWrappedCollection.Get(index); }
+			get { return (HttpPostedFileBase)wrappedCollection.Get(index); }
 		}
 
 		/// <summary>
@@ -163,7 +163,7 @@ namespace FakeN.Web
 		/// </returns>
 		public override KeysCollection Keys
 		{
-			get { return mWrappedCollection.Keys; }
+			get { return wrappedCollection.Keys; }
 		}
 
 		/// <summary>
@@ -172,7 +172,7 @@ namespace FakeN.Web
 		/// <param name="info">A <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object that contains the information required to serialize the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase"/> instance.</param><param name="context">A <see cref="T:System.Runtime.Serialization.StreamingContext"/> object that contains the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase"/> instance.</param><exception cref="T:System.ArgumentNullException"><paramref name="info"/> is null.</exception>
 		public override void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
-			mWrappedCollection.GetObjectData(info, context);
+			wrappedCollection.GetObjectData(info, context);
 		}
 
 		/// <summary>
@@ -181,7 +181,7 @@ namespace FakeN.Web
 		/// <param name="sender">The source of the deserialization event.</param><exception cref="T:System.Runtime.Serialization.SerializationException">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object associated with the current <see cref="T:System.Collections.Specialized.NameObjectCollectionBase"/> instance is invalid.</exception>
 		public override void OnDeserialization(object sender)
 		{
-			mWrappedCollection.OnDeserialization(sender);
+			wrappedCollection.OnDeserialization(sender);
 		}
 
 		private class ConcreteNameObjectCollection : NameObjectCollectionBase
