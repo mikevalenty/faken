@@ -27,5 +27,9 @@ namespace FakeN.Web
 			this.appPathModifier = appPathModifier;
 			return this;
 		}
+
+		public override int StatusCode { get; set; }
+		public override string StatusDescription { get; set; }
+		public override int SubStatusCode { get; set; }
 	}
 }

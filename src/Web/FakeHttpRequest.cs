@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -13,12 +14,14 @@ namespace FakeN.Web
 		private readonly NameValueCollection headers;
 		private readonly NameValueCollection serverVariables;
 		private readonly HttpCookieCollection cookies;
+		private HttpFileCollectionBase files;
 		private Uri url;
 		private string method;
 		private bool isLocal;
 		private string userHostAddress;
 		private string applicationPath;
 		private string[] acceptTypes;
+		private Stream inputStream;
 
 		public FakeHttpRequest(Uri url = null, string method = "GET")
 		{
@@ -145,16 +148,44 @@ namespace FakeN.Web
 
 		static NameValueCollection ParseQueryString(string url)
 		{
-			url = url.Replace("?", "");
+			return HttpUtility.ParseQueryString(url);
+		}
 
-			var parameters = new NameValueCollection();
+		public override HttpFileCollectionBase Files
+		{
+			get { return files; }
+		}
 
-			foreach (var parameter in url.Split('&').Where(p => p.Contains('=')).Select(p => p.Split('=')))
-			{
-				parameters.Add(parameter[0], parameter[1]);
-			}
+		public void SetFiles(FakeHttpFileCollection files)
+		{
+			this.files = files;
+		}
 
-			return parameters;
+		public override string Path
+		{
+			get { return Url.AbsolutePath; }
+		}
+
+		public override string FilePath
+		{
+			//TODO: in the case that the handler would be mapped to a prefix of the path, the last part of the AbsolutePath would be returned in PathInfo
+			get { return Url.AbsolutePath; }
+		}
+
+		public override string PathInfo
+		{
+			//TODO: in the case that the handler would be mapped to a prefix of the path, the last part of the AbsolutePath would be returned in PathInfo
+			get { throw new NotImplementedException(); }
+		}
+
+		public override Stream InputStream
+		{
+			get { return inputStream; }
+		}
+
+		public void SetInputStream(Stream inputStream)
+		{
+			this.inputStream = inputStream;
 		}
 	}
 }
