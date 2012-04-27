@@ -90,3 +90,19 @@ public void User_can_be_authenticated_with_convenience_method()
 }
 ```
 
+You can also set any virtual property from one of the `Http*` classes, even those that aren't explicitly settable. e.g., for `HttpContext`:
+
+```c#
+var context = new FakeHttpContext();
+var uri = new Uri("http://www.google.com/");
+
+//set the UrlReferrer
+context.Set(ctx => ctx.UrlReferrer, uri);
+
+//get the UrlReferrer
+Console.WriteLine(context.UrlReferrer); //<http://www.google.com/>
+```
+
+This means no more `NotImplementedException`s in your tests.
+
+
