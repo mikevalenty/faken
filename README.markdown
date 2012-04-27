@@ -71,7 +71,7 @@ public void Should_add_values_to_session()
 
 User:
 
-```
+```c#
 [Test]
 public void User_should_not_be_authenticated()
 {
