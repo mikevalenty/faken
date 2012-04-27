@@ -86,6 +86,7 @@ public void User_can_be_authenticated_with_convenience_method()
 	var context = new FakeHttpContext().Authenticate();
 
 	Assert.That(context.User.Identity.IsAuthenticated, Is.True);
+	Assert.That(context.Request.IsAuthenticated, Is.True);
 }
 ```
 
