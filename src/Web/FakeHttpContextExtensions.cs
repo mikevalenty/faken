@@ -21,7 +21,7 @@ namespace FakeN.Web
 		{
 			var request = context.Request as FakeHttpRequest;
 			if (request != null) {
-				request.SetAuthenticated(true);
+				request.Set(req => req.IsAuthenticated, true);
 			}
 
 			return context.Set(new MutableIdentity { IsAuthenticated = true });

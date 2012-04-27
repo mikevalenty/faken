@@ -50,6 +50,7 @@
     <Compile Include="FakeHttpResponse.cs" />
     <Compile Include="FakeHttpSessionState.cs" />
     <Compile Include="FakeHttpSessionStateExtensions.cs" />
+    <Compile Include="HttpObjectExtensions.cs" />
     <Compile Include="MutableIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
