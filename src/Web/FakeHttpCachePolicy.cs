@@ -4,6 +4,10 @@ namespace FakeN.Web
 {
 	public class FakeHttpCachePolicy : HttpCachePolicyBase
 	{
+		private HttpCacheVaryByParams varyByParams;
+		private HttpCacheVaryByHeaders varyByHeaders;
+		private HttpCacheVaryByContentEncodings varyByContentEncodings;
+
 		public override void SetExpires(System.DateTime date)
 		{
 		}
@@ -23,5 +27,9 @@ namespace FakeN.Web
 		public override void SetNoStore()
 		{
 		}
+
+		public override HttpCacheVaryByParams VaryByParams { get { return varyByParams; } }
+		public override HttpCacheVaryByHeaders VaryByHeaders { get { return varyByHeaders; } }
+		public override HttpCacheVaryByContentEncodings VaryByContentEncodings { get { return varyByContentEncodings; } }
 	}
 }

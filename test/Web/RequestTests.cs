@@ -33,7 +33,7 @@ namespace FakeN.Web.Test
 		[Test]
 		public void Request_can_be_specified_to_be_local()
 		{
-			Assert.That(new FakeHttpRequest().SetIsLocal(true).IsLocal, Is.True);
+			Assert.That(new FakeHttpRequest().Set(req => req.IsLocal, true).IsLocal, Is.True);
 		}
 
 		[Test]
@@ -69,7 +69,7 @@ namespace FakeN.Web.Test
 
 			var file = new FakeHttpPostedFile("SomeFile.txt", "text/plain", fileContents);
 			files.Add("FileFormFieldValue", file);
-			request.SetFiles(files);
+			request.Set(req => req.Files, files);
 
 			Assert.That(request.Files.Count, Is.EqualTo(1));
 			Assert.That(request.Files[0].FileName, Is.EqualTo("SomeFile.txt"));
@@ -84,11 +84,29 @@ namespace FakeN.Web.Test
 			var requestBodyText = "This is the raw request body.";
 			var bytes = Encoding.UTF8.GetBytes(requestBodyText);
 			var stream = new MemoryStream(bytes, false);
-			request.SetInputStream(stream);
+			request.Set(req => req.InputStream, stream);
 
 			var gotStream = request.InputStream;
 			var rdr = new StreamReader(gotStream, Encoding.UTF8);
 			Assert.That(rdr.ReadToEnd(), Is.EqualTo(requestBodyText));
+		}
+
+		[Test]
+		public void Can_set_authenticated_status() 
+		{
+			var request = new FakeHttpRequest();
+
+			Assert.That(request, Has.Property("IsAuthenticated").False);
+			request.Set(req => req.IsAuthenticated, true);
+			Assert.That(request, Has.Property("IsAuthenticated").True);
+		}
+
+		[Test]
+		public void Should_set_value() {
+			var request = new FakeHttpRequest();
+			var uri = new Uri("http://localhost/");
+			request.Set(req => req.UrlReferrer, uri);
+			Assert.That(request, Has.Property("UrlReferrer").EqualTo(uri));
 		}
 	}
 }
