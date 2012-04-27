@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Web;
 
@@ -22,6 +21,7 @@ namespace FakeN.Web
 		private string applicationPath;
 		private string[] acceptTypes;
 		private Stream inputStream;
+		private bool isAuthenticated;
 
 		public FakeHttpRequest(Uri url = null, string method = "GET")
 		{
@@ -33,6 +33,16 @@ namespace FakeN.Web
 			headers = new NameValueCollection();
 			serverVariables = new NameValueCollection();
 			cookies = new HttpCookieCollection();
+		}
+
+		public void SetAuthenticated(bool authenticated) 
+		{
+			isAuthenticated = authenticated;
+		}
+
+		public override bool IsAuthenticated 
+		{
+			get { return isAuthenticated; }
 		}
 
 		public override Uri Url

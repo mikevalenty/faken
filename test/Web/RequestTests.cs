@@ -90,5 +90,15 @@ namespace FakeN.Web.Test
 			var rdr = new StreamReader(gotStream, Encoding.UTF8);
 			Assert.That(rdr.ReadToEnd(), Is.EqualTo(requestBodyText));
 		}
+
+		[Test]
+		public void Can_set_authenticated_status() 
+		{
+			var request = new FakeHttpRequest();
+
+			Assert.That(request, Has.Property("IsAuthenticated").False);
+			request.SetAuthenticated(true);
+			Assert.That(request, Has.Property("IsAuthenticated").True);
+		}
 	}
 }
